@@ -8,11 +8,20 @@ const ItemList = ({ form, setForm }) => {
       ...form,
       products: [...products, { name: "", price: "", qty: "" }],
     });
-    console.log(products);
   };
 
-  const changHandler = () => {};
-  const deleteHandler = () => {};
+  const changHandler = (e, index) => {
+    const { name, value } = e.target;
+    const newProducts = [...products];
+    newProducts[index][name] = value;
+    setForm({ ...form, products: newProducts });
+  };
+
+  const deleteHandler = (e, index) => {
+    const newProducts = [...products];
+    newProducts.splice(index, 1);
+    setForm({ ...form, products: newProducts });
+  };
 
   return (
     <div className="item-list">
@@ -24,7 +33,7 @@ const ItemList = ({ form, setForm }) => {
             label="Product Name"
             type="text"
             value={product.name}
-            onChange={changHandler}
+            onChange={(e) => changHandler(e, index)}
           />
           <div>
             <FormInput
@@ -32,17 +41,17 @@ const ItemList = ({ form, setForm }) => {
               label="Price"
               type="text"
               value={product.price}
-              onChange={changHandler}
+              onChange={(e) => changHandler(e, index)}
             />
             <FormInput
               name="qty"
               label="Qty"
               type="text"
               value={product.qty}
-              onChange={changHandler}
+              onChange={(e) => changHandler(e, index)}
             />
           </div>
-          <button onClick={deleteHandler}>Remove</button>
+          <button onClick={(e) => deleteHandler(e, index)}>Remove</button>
         </div>
       ))}
       <button onClick={addHandler}>Add Item</button>

@@ -18,10 +18,14 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     //in this sesion data in an object
     const data = req.body.data;
+    console.log(data);
 
     //validation data befor send to database
+
     if (!data.name || !data.lastName || !data.email)
-      return res.status(400).json({ status: "faild", message: "invalid Data" });
+      return res
+        .status(400)
+        .json({ status: "failed", message: "Invalid data" });
 
     //   save Data
     try {

@@ -4,7 +4,7 @@ const customerSchema = new Schema({
   name: {
     type: String,
     required: true,
-    minLength: 3,
+    minLength: 1,
   },
   lastName: {
     type: String,
@@ -14,25 +14,22 @@ const customerSchema = new Schema({
   email: {
     type: String,
     required: true,
-    minLength: 3,
+    minLength: 1,
   },
   phone: String,
   address: String,
   postalCode: Number,
-  date: Date, //date of first sell
+  date: Date,
   products: {
     type: Array,
     default: [],
   },
   createdAt: {
     type: Date,
-    default: () => Date.now(), // date of create in data base
+    default: () => Date.now(),
     immutable: true,
   },
-  updatedAt: {
-    type: Date,
-    default: () => Date.now(),
-  },
+  updatedAt: { type: Date, default: () => Date.now() },
 });
 
 const Customer = models.Customer || model("Customer", customerSchema);
